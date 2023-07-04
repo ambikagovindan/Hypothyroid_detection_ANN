@@ -1,0 +1,10 @@
+numpy
+pandas
+Flask
+seaborn
+matplotlib
+statsmodels
+scikit-learn
+tensorflow
+
+#-e .
