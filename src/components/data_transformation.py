@@ -4,9 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np 
 import pandas as pd
-from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
 
 from src.exception import CustomException
 from src.logger import logging
@@ -102,6 +100,8 @@ class DataTransformation:
             target_feature_test_df=test_df[target_column_name]
 
             preprocessing_obj = pd.concat([train_df,test_df],ignore_index=True)
+            train_arr = np.array(train_df)
+            test_arr =  np.array(test_df)
 
             save_object(
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
@@ -110,8 +110,8 @@ class DataTransformation:
             logging.info('Preprocessor pickle file saved')
 
             return (
-                train_df,
-                test_df,
+                train_arr,
+                test_arr,
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
         except Exception as e:
