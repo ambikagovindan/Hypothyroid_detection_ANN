@@ -6,5 +6,6 @@ matplotlib
 statsmodels
 scikit-learn
 tensorflow
+pickle
 
 #-e .
