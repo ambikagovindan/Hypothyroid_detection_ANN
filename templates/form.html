@@ -2,70 +2,200 @@
 <body>
 <form action="{{url_for('predict_datapoint')}}" method="POST">
     <div class="form-group">
-        <label for="carat">Carat:</label>
-        <input type="text" id="carat" name="carat" placeholder="Enter carat value (float)">
+        <label for="age">age:</label>
+        <input type="text" id="age" name="age" placeholder="Enter your age (float)">
     </div>
 
     <div class="form-group">
-        <label for="depth">Depth:</label>
-        <input type="text" id="depth" name="depth" placeholder="Enter depth value (float)">
+        <label for="TSH">TSH:</label>
+        <input type="text" id="TSH" name="TSH" placeholder="Enter TSH level (float)">
     </div>
 
     <div class="form-group">  
-        <label for="table">Table:</label>
-        <input type="text" id="table" name="table" placeholder="Enter table value (float)">
+        <label for="T3">T3:</label>
+        <input type="text" id="T3" name="T3" placeholder="Enter T3 level (float)">
     </div>
     
     <div class="form-group">
-        <label for="x">x:</label>
-        <input type="text" id="x" name="x" placeholder="Enter x value (float)">
+        <label for="TT4">TT4:</label>
+        <input type="text" id="TT4" name="TT4" placeholder="Enter TT4 level (float)">
     </div>
   
     <div class="form-group">
-        <label for="y">y:</label>
-        <input type="text" id="y" name="y" placeholder="Enter y value (float)">
+        <label for="T4U">T4U:</label>
+        <input type="text" id="T4U" name="T4U" placeholder="Enter T4U level (float)">
     </div>
   
     <div class="form-group">
-        <label for="z">z:</label>
-        <input type="text" id="z" name="z" placeholder="Enter z value (float)">
+        <label for="FTI">FTI:</label>
+        <input type="text" id="FTI" name="FTI" placeholder="Enter FTI level (float)">
     </div>         
   
 <div class="form-group">
-  <label for="cut">Cut:</label>
-  <select id="cut" name="cut">
-    <option value="Fair">Fair</option>
-    <option value="Good">Good</option>
-    <option value="Very Good">Very Good</option>
-    <option value="Premium">Premium</option>
-    <option value="Ideal">Ideal</option>
+  <label for="sex">sex:</label>
+  <select id="sex" name="sex">
+    <option value="F">F</option>
+    <option value="M">M</option>
   </select>
 </div>
   
 <div class="form-group">
-  <label for="color">Color:</label>
-  <select id="color" name="color">
-    <option value="D">D</option>
-    <option value="E">E</option>
-    <option value="F">F</option>
-    <option value="G">G</option>
-    <option value="H">H</option>
-    <option value="I">I</option>
-    <option value="J">J</option>
+  <label for="on_thyroxine">on_thyroxine:</label>
+  <select id="on_thyroxine" name="on_thyroxine">
+    <option value="f">f</option>
+    <option value="t">t</option>
   </select>
 </div>
 
 <div class="form-group">
-  <label for="clarity">Clarity:</label>
-  <select id="clarity" name="clarity">
-    <option value="I1">I1</option>
-    <option value="SI2">SI2</option>
-    <option value="SI1">SI1</option>
-    <option value="VS2">VS2</option>
-    <option value="VS1">VS1</option>
-    <option value="VVS2">VVS2</option>
-    <option value="VVS1">VVS1</option>
-    <option value="IF">IF</option>
+  <label for="query_on_thyroxine">query_on_thyroxine:</label>
+  <select id="query_on_thyroxine" name="query_on_thyroxine">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="on_antithyroid_medication">on_antithyroid_medication:</label>
+  <select id="on_antithyroid_medication" name="on_antithyroid_medication">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="sick">sick:</label>
+  <select id="sick" name="sick">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="pregnant">pregnant:</label>
+  <select id="pregnant" name="pregnant">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="thyroid_surgery">thyroid_surgery:</label>
+  <select id="thyroid_surgery" name="thyroid_surgery">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="I131_treatment">I131_treatment:</label>
+  <select id="I131_treatment" name="I131_treatment">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="query_hypothyroid">query_hypothyroid:</label>
+  <select id="query_hypothyroid" name="query_hypothyroid">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="query_hyperthyroid">query_hyperthyroid:</label>
+  <select id="query_hyperthyroid" name="query_hyperthyroid">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="lithium">lithium:</label>
+  <select id="lithium" name="lithium">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="goitre">goitre:</label>
+  <select id="goitre" name="goitre">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="tumor">tumor:</label>
+  <select id="tumor" name="tumor">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="hypopituitary">hypopituitary:</label>
+  <select id="hypopituitary" name="hypopituitary">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="psych">psych:</label>
+  <select id="psych" name="psych">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="TSH_measured">TSH_measured:</label>
+  <select id="TSH_measured" name="TSH_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="T3_measured">T3_measured:</label>
+  <select id="T3_measured" name="T3_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="T4U_measured">T4U_measured:</label>
+  <select id="T4U_measured" name="T4U_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="FTI_measured">FTI_measured:</label>
+  <select id="FTI_measured" name="FTI_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="TBG_measured">TBG_measured:</label>
+  <select id="TBG_measured" name="TBG_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="TT4_measured">TT4_measured:</label>
+  <select id="TT4_measured" name="TT4_measured">
+    <option value="f">f</option>
+    <option value="t">t</option>
   </select>
 </div>
 
