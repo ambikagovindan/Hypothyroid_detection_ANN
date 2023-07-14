@@ -1,4 +1,4 @@
-age,sex,on thyroxine,query on thyroxine,on antithyroid medication,sick,pregnant,thyroid surgeryI131 treatment,query hypothyroid,query hyperthyroid,lithium,goitre,tumor,hypopituitary,psych,TSH measured,TSH,T3 measured,T3,TT4 measured,TT4,T4U measured,T4U,FTI measured,FTI,TBG measured,TBG,referral source,class
+age,sex,on_thyroxine,query_on_thyroxine,on_antithyroid_medication,sick,pregnant,thyroid_surgeryI131_treatment,query_hypothyroid,query_hyperthyroid,lithium,goitre,tumor,hypopituitary,psych,TSH_measured,TSH,T3_measured,T3,TT4_measured,TT4,T4U_measured,T4U,FTI_measured,FTI,TBG_measured,TBG,referral_source,class
 F,f,f,f,f,f,f,f,f,f,f,f,f,f,f,t,2.1,t,2.2,t,95,t,1,t,95,f,?,other,negative.|2681
 F,f,f,f,f,f,f,f,f,f,f,f,t,f,f,t,6.2,f,?,t,86,t,0.9,t,95,f,?,other,compensated hypothyroid.|602
 M,t,f,f,f,f,f,f,f,f,f,f,f,f,f,t,0.2,t,2.3,t,116,t,0.94,t,123,f,?,other,negative.|686

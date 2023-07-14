@@ -31,33 +31,33 @@ class DataTransformation:
 
             features = ['age',
                         'sex',
-                        'on thyroxine',
-                        'query on thyroxine',
-                        'on antithyroid medication',
+                        'on_thyroxine',
+                        'query_on_thyroxine',
+                        'on_antithyroid_medication',
                         'sick',
                         'pregnant',
-                        'thyroid surgery'
-                        'I131 treatment',
-                        'query hypothyroid',
-                        'query hyperthyroid',
+                        'thyroid_surgery'
+                        'I131_treatment',
+                        'query_hypothyroid',
+                        'query_hyperthyroid',
                         'lithium',
                         'goitre',
                         'tumor',
                         'hypopituitary',
                         'psych',
-                        'TSH measured',
+                        'TSH_measured',
                         'TSH',
-                        'T3 measured',
+                        'T3_measured',
                         'T3',
-                        'TT4 measured',
+                        'TT4_measured',
                         'TT4',
-                        'T4U measured',
+                        'T4U_measured',
                         'T4U',
-                        'FTI measured',
+                        'FTI_measured',
                         'FTI',
-                        'TBG measured',
+                        'TBG_measured',
                         'TBG',
-                        'referral source',
+                        'referral_source',
                         'class']
             
             # feature engineering of target
@@ -69,9 +69,9 @@ class DataTransformation:
 
             # deleting features with no information
             del train_df["TBG"]
-            del train_df["referral source"]
+            del train_df["referral_source"]
             del test_df["TBG"]
-            del test_df["referral source"]
+            del test_df["referral_source"]
             
             # repalcing with dummies
             train_df=train_df.replace({"t":1,"f":0,"?":np.NAN,"F":1,"M":0})
