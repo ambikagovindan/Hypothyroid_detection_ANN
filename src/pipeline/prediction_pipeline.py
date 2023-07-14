@@ -11,15 +11,14 @@ class PredictPipeline:
 
     def predict(self,features):
         try:
-            preprocessor_path = os.path.join('artifacts','preprocessor.pkl')
+    
             model_path = os.path.join('artifacts','model.pkl')
 
-            preprocessor = load_object(preprocessor_path)
+            
             model = load_object(model_path)
-
             
 
-            pred = model.predict(preprocessor)
+            pred = model.predict(features)
 
             return pred
 
@@ -29,38 +28,97 @@ class PredictPipeline:
         
 class CustomData:
     def __init__(self,
-                 age:float,
-                 sex:float,
-                 on thyroxine:int,
-                 query on thyroxine:float,
-                 y:float,
-                 z:float,
-                 cut:str,
-                 color:str,
-                 clarity:str):
+                 age,
+                 sex,
+                 on_thyroxine,
+                 query_on_thyroxine,
+                 on_antithyroid_medication,
+                 sick,
+                 pregnant,
+                 thyroid_surgery,
+                 I131_treatment,
+                 query_hypothyroid,
+                 query_hyperthyroid,
+                 lithium,
+                 goitre,
+                 tumor,
+                 hypopituitary,
+                 psych,
+                 TSH_measured,
+                 TSH,
+                 T3_measured,
+                 T3,
+                 TT4_measured,
+                 TT4,
+                 T4U_measured,
+                 T4U,
+                 FTI_measured,
+                 FTI,
+                 TBG_measured,
+
+                 ):
         
-        self.carat=carat
-        self.depth=depth
-        self.table=table
-        self.x=x
-        self.y=y
-        self.z=z
-        self.cut = cut
-        self.color = color
-        self.clarity = clarity
+        self.age=age
+        self.sex=sex
+        self.on_thyroxine=on_thyroxine
+        self.query_on_thyroxine=query_on_thyroxine
+        self.on_antithyroid_medication=on_antithyroid_medication
+        self.sick=sick
+        self.pregnant= pregnant
+        self.thyroid_surgery=thyroid_surgery
+        self.I131_treatment=I131_treatment
+        self.query_hypothyroid=query_hypothyroid
+        self.query_hyperthyroid=query_hyperthyroid
+        self.lithium=lithium
+        self.goitre=goitre
+        self.tumor=tumor
+        self.hypopituitary=hypopituitary
+        self.psych=psych
+        self.TSH_measured=TSH_measured
+        self.TSH=TSH
+        self.T3_measured=T3_measured
+        self.T3=T3
+        self.TT4_measured=TT4_measured
+        self.TT4=TT4
+        self.T4U_measured=T4U_measured
+        self.T4U=T4U
+        self.FTI_measured=FTI_measured
+        self.FTI=FTI
+        self.TBG_measured=TBG_measured
+
+
+
 
     def get_data_as_dataframe(self):
         try:
             custom_data_input_dict = {
-                'carat':[self.carat],
-                'depth':[self.depth],
-                'table':[self.table],
-                'x':[self.x],
-                'y':[self.y],
-                'z':[self.z],
-                'cut':[self.cut],
-                'color':[self.color],
-                'clarity':[self.clarity]
+                'age':[self.age],
+                'sex':[self.sex],
+                'on_thyroxine':[self.on_thyroxine],
+                'query_on_thyroxine':[self.query_on_thyroxine],
+                'on_antithyroid_medication':[self.on_antithyroid_medication],
+                'sick':[self.sick],
+                'pregnant':[self.pregnant],
+                'thyroid_surgery':[self.thyroid_surgery],
+                'I131_treatment':[self.I131_treatment],
+                'query_hypothyroid':[self.query_hypothyroid],
+                'query_hyperthyroid':[self.query_hyperthyroid],
+                'lithium':[self.lithium],
+                'goitre':[self.goitre],
+                'tumor':[self.tumor],
+                'hypopituitary':[self.hypopituitary],
+                'psych':[self.psych],
+                'TSH_measured':[self.TSH_measured],
+                'TSH':[self.TSH],
+                'T3':[self.T3],
+                'T3_measured':[self.T3_measured],
+                'TT4_measured':[self.TT4_measured],
+                'TT4':[self.TT4],
+                'T4U_measured':[self.T4U_measured],
+                'T4U':[self.T4U],
+                'FTI_measured':[self.FTI_measured],
+                'FTI':[self.FTI],
+                'TBG_measured':[self.TBG_measured],
             }
             df = pd.DataFrame(custom_data_input_dict)
             logging.info('Dataframe Gathered')

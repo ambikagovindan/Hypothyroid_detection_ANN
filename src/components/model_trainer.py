@@ -26,7 +26,10 @@ class ModelTrainer:
     def initiate_model_training(self,train_arr,test_arr):
         try:
             logging.info('Splitting Dependent and Independent variables from train and test data')
-            X_train,y_train,X_test,y_test = (train_arr[:,:-1], train_arr[:,-1],test_arr[:,:-1],test_arr[:,-1])
+            X_train,y_train,X_test,y_test = (train_arr[:,:-1],
+                                             train_arr[:,-1],
+                                             test_arr[:,:-1],
+                                             test_arr[:,-1])
             models = {
                 'DecisionTreeClassifier':DecisionTreeClassifier(),
                 'RandomForestClassifier':RandomForestClassifier(),

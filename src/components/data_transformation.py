@@ -5,6 +5,9 @@ from dataclasses import dataclass
 import numpy as np 
 import pandas as pd
 from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
 
 from src.exception import CustomException
 from src.logger import logging
@@ -17,7 +20,65 @@ class DataTransformationConfig:
 
 class DataTransformation:
     def __init__(self):
-        self.data_transformation_config=DataTransformationConfig()    
+        self.data_transformation_config=DataTransformationConfig()
+        
+    def get_data_transformation_object(self):
+        try:
+            logging.info('Data transformation initiated')
+            # Define which columns should be one hot encoded
+            categorical_cols = ['sex',
+                                'on_thyroxine',
+                                'query_on_thyroxine',
+                                'on_antithyroid_medication',
+                                'sick',
+                                'pregnant',
+                                'thyroid_surgery',
+                                'I131_treatment',
+                                'query_hypothyroid',
+                                'query_hyperthyroid',
+                                'lithium',
+                                'goitre',
+                                'tumor',
+                                'hypopituitary',
+                                'psych',
+                                'TSH_measured',
+                                'T3_measured',
+                                'TT4_measured',
+                                'T4U_measured',
+                                'FTI_measured',
+                                'TBG_measured'
+                                ]
+            numerical_cols = ['age','TSH','T3','TT4','T4U','FTI']
+
+            logging.info('Pipeline Initiated')
+
+            ## Numerical Pipeline
+            num_pipeline = Pipeline(
+                steps=[('imputer',SimpleImputer(strategy='median'))]
+            )
+
+            # Categorigal Pipeline
+            cat_pipeline = Pipeline(
+                steps=[
+                ('imputer',SimpleImputer(strategy='most_frequent')),
+                ('ohe',OneHotEncoder())]) 
+                
+            
+
+            preprocessor=ColumnTransformer([
+                ('num_pipeline',num_pipeline,numerical_cols),
+                ('cat_pipeline',cat_pipeline,categorical_cols)
+
+            ])
+
+            return preprocessor
+        
+            logging.info('Pipeline Completed')
+
+        except Exception as e:
+            logging.info("Error in Data Trnasformation")
+            raise CustomException(e,sys)
+            
 
     def initiate_data_transformation(self,train_path,test_path):
         try:
@@ -26,45 +87,12 @@ class DataTransformation:
 
             logging.info("Read train and test data completed")
 
-            logging.info(f'Train Dataframe Head : \n{train_df.head().to_string()}')
-            logging.info(f'Test Dataframe Head  : \n{test_df.head().to_string()}')
-
-            features = ['age',
-                        'sex',
-                        'on_thyroxine',
-                        'query_on_thyroxine',
-                        'on_antithyroid_medication',
-                        'sick',
-                        'pregnant',
-                        'thyroid_surgery'
-                        'I131_treatment',
-                        'query_hypothyroid',
-                        'query_hyperthyroid',
-                        'lithium',
-                        'goitre',
-                        'tumor',
-                        'hypopituitary',
-                        'psych',
-                        'TSH_measured',
-                        'TSH',
-                        'T3_measured',
-                        'T3',
-                        'TT4_measured',
-                        'TT4',
-                        'T4U_measured',
-                        'T4U',
-                        'FTI_measured',
-                        'FTI',
-                        'TBG_measured',
-                        'TBG',
-                        'referral_source',
-                        'class']
             
-            # feature engineering of target
+            # Defining target class
             train_df['class'] = train_df['class'].apply(lambda x:x.split('.')[0])
-            train_df["class"] = train_df["class"].map({'negative':0,'compensated hypothyroid':1,'primary hypothyroid':1,'secondary hypothyroid':1})
+            train_df["class"] = train_df["class"].map({'negative':'N','compensated hypothyroid':'P','primary hypothyroid':'P','secondary hypothyroid':'P'})
             test_df['class'] = test_df['class'].apply(lambda x:x.split('.')[0])
-            test_df["class"] = test_df["class"].map({'negative':0,'compensated hypothyroid':1,'primary hypothyroid':1,'secondary hypothyroid':1})
+            test_df["class"] = test_df["class"].map({'negative':'N','compensated hypothyroid':'P','primary hypothyroid':'P','secondary hypothyroid':'P'})
 
 
             # deleting features with no information
@@ -73,24 +101,25 @@ class DataTransformation:
             del test_df["TBG"]
             del test_df["referral_source"]
             
-            # repalcing with dummies
-            train_df=train_df.replace({"t":1,"f":0,"?":np.NAN,"F":1,"M":0})
-            test_df=test_df.replace({"t":1,"f":0,"?":np.NAN,"F":1,"M":0})
+            # repalcing '?' with nan
+            train_df=train_df.replace({"?":np.NAN})
+            test_df=test_df.replace({"?":np.NAN})
 
-            # converting object dtpes to float
-            obj_cols = train_df.columns[train_df.dtypes=='object']
-            for feat in obj_cols:
-                train_df[obj_cols] = train_df[obj_cols].astype('float')
-                test_df[obj_cols] = test_df[obj_cols].astype('float')
+            # converting object dtpes to float of continous features
+            numerical_cols = ['age','TSH','T3','TT4','T4U','FTI']
 
-            # dealing with null values
-            imputer = SimpleImputer(strategy='median')
-            nan_feat = ['age','TSH','T3','TT4','T4U','FTI']
-            for feat in nan_feat:
-                train_df[feat] = imputer.fit_transform(train_df[[feat]])
-                test_df[feat] = imputer.fit_transform(test_df[[feat]])
-            train_df['sex'] = train_df['sex'].fillna(0.0) 
-            test_df['sex'] = test_df['sex'].fillna(0.0) 
+            
+            for feat in numerical_cols:
+                train_df[feat] = train_df[feat].astype('float')
+                test_df[feat] = test_df[feat].astype('float')
+
+            logging.info(f'Train Dataframe Head : \n{train_df.head().to_string()}')
+            logging.info(f'Test Dataframe Head  : \n{test_df.head().to_string()}')    
+
+            logging.info('Obtaining preprocessing object')
+            
+
+            preprocessing_obj = self.get_data_transformation_object()
 
             target_column_name = 'class'
             input_feature_train_df = train_df.drop(columns=target_column_name,axis=1)
@@ -99,9 +128,17 @@ class DataTransformation:
             input_feature_test_df=test_df.drop(columns=target_column_name,axis=1)
             target_feature_test_df=test_df[target_column_name]
 
-            preprocessing_obj = pd.concat([train_df,test_df],ignore_index=True)
-            train_arr = np.array(train_df)
-            test_arr =  np.array(test_df)
+            ## Trnasformating using preprocessor obj
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
+
+            logging.info("Applying preprocessing object on training and testing datasets.")
+            train_arr = np.c_[np.array(input_feature_train_arr), np.array(target_feature_train_df)]
+            test_arr = np.c_[np.array(input_feature_test_arr), np.array(target_feature_test_df)]
+
+            
+            
+            
 
             save_object(
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
