@@ -53,7 +53,7 @@ class ModelTrainer:
                 print('\n')
 
             logging.info('models trained')
-            best_model = DecisionTreeClassifier()
+            best_model = DecisionTreeClassifier().fit(X_train,y_train)
             save_object(
                  file_path=self.model_trainer_config.trained_model_file_path,
                  obj=best_model
