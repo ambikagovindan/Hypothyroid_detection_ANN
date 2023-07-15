@@ -12,4 +12,3 @@ Dataset link:https://archive.ics.uci.edu/dataset/102/thyroid+disease
 * 2800 training (data) instances and 972 test instances 
 * Plenty of missing data 
 * 29 or so attributes, either Boolean or continuously-valued
-
