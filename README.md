@@ -1,4 +1,4 @@
-# Hypothyroid Disease Detection using Deep Learning
+# Hypothyroid Disease Detection using Decision Tree classifier
 
 Hypothyroidism, also called underactive thyroid, is when the thyroid gland doesn’t make enough thyroid hormones to meet your body’s needs. The thyroid is a small, butterfly-shaped gland in the front of your neck. Thyroid hormones control the way your body uses energy, so they affect nearly every organ in your body, even the way your heart beats. Without enough thyroid hormones, many of your body’s functions slow down.
 ![Alt text](image.png)
